@@ -1,9 +1,9 @@
-/* eslint-disable jsx-a11y/media-has-caption */
 import React, { useRef, useEffect } from 'react';
 
 const Player = ({ activeSong, isPlaying, volume, seekTime, onEnded, onTimeUpdate, onLoadedData, repeat }) => {
+  // define states
   const ref = useRef(null);
-  // eslint-disable-next-line no-unused-expressions
+
   if (ref.current) {
     if (isPlaying) {
       ref.current.play();
@@ -12,17 +12,19 @@ const Player = ({ activeSong, isPlaying, volume, seekTime, onEnded, onTimeUpdate
     }
   }
 
+  // update volume value on change volume
   useEffect(() => {
     ref.current.volume = volume;
   }, [volume]);
-  // updates audio element only on seekTime change (and not on each rerender):
+
+  // updates audio element only on seekTime change
   useEffect(() => {
     ref.current.currentTime = seekTime;
   }, [seekTime]);
 
   return (
     <audio
-      src={activeSong?.hub?.actions[1]?.uri}
+      src={activeSong?.hub?.actions ? activeSong?.hub?.actions[1]?.uri : null}
       ref={ref}
       loop={repeat}
       onEnded={onEnded}

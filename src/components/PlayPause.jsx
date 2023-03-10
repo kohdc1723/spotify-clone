@@ -5,13 +5,13 @@ const PlayPause = ({ isPlaying, activeSong, song, handlePause, handlePlay }) => 
     isPlaying && activeSong?.title === song.title ? (
       <FaPauseCircle
         size={35}
-        className="text-white"
+        className="text-spotify-green"
         onClick={handlePause}
       />
     ) : (
       <FaPlayCircle
         size={35}
-        className="text-white"
+        className="text-spotify-green"
         onClick={handlePlay}
       />
     )

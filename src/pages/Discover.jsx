@@ -29,7 +29,7 @@ const Discover = () => {
           className="bg-zinc-900 text-white p-3 text-sm rounded-lg outline-none sm:mt-0 mt-5"
         >
           {genres.map((genre) => (
-            <option key={genre.value} value={genre.value}>{genre.value}</option>
+            <option key={genre.value} value={genre.value}>{genre.title}</option>
           ))}
         </select>
       </div>

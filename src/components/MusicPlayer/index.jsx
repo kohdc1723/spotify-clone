@@ -9,6 +9,7 @@ import Track from './Track';
 import VolumeBar from './VolumeBar';
 
 const MusicPlayer = () => {
+  // define states
   const { activeSong, currentSongs, currentIndex, isActive, isPlaying } = useSelector((state) => state.player);
   const [duration, setDuration] = useState(0);
   const [seekTime, setSeekTime] = useState(0);
@@ -16,11 +17,19 @@ const MusicPlayer = () => {
   const [volume, setVolume] = useState(0.3);
   const [repeat, setRepeat] = useState(false);
   const [shuffle, setShuffle] = useState(false);
+
+  // use dispatch
   const dispatch = useDispatch();
 
+  // if elements exist in currentSongs array, set isPlaying true
   useEffect(() => {
     if (currentSongs.length) dispatch(playPause(true));
   }, [currentIndex]);
+
+  // if activeSong doesn't have a sound source, skip to the next song
+  // useEffect(() => {
+  //   if (!activeSong.hub.actions) handleNextSong();
+  // }, [activeSong]);
 
   const handlePlayPause = () => {
     if (!isActive) return;
@@ -53,7 +62,7 @@ const MusicPlayer = () => {
   };
 
   return (
-    <div className="relative sm:px-12 px-8 w-full flex items-center justify-between">
+    <div className="flex sm:px-12 px-8 w-full items-center justify-between">
       <Track isPlaying={isPlaying} isActive={isActive} activeSong={activeSong} />
       <div className="flex-1 flex flex-col items-center justify-center">
         <Controls
